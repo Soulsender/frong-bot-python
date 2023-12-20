@@ -37,7 +37,7 @@ def main():
     async def on_message(message):
         if message.author == bot.user:
             return
-        frong_words = ["frong", "FRONG"]
+        frong_words = ["frong", "FRONG", "Frong"]
         arch_words = ["arch", "Arch", "archlinux"]
         # # annoying ass arch linux reply 
         # for word in arch_words:
