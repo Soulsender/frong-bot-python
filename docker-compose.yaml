@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  frong-bot:
+    image: frong-bot:latest
+    build:
+      context: .
+    environment:
+      - TOKEN=your_token_here
+    restart: unless-stopped
+
