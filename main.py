@@ -3,6 +3,7 @@ import nextcord
 from nextcord.ext import commands
 import os
 import aiohttp
+from random import randint
 
 load_dotenv()
 
@@ -23,6 +24,23 @@ def main():
         owner_id="null",
     )
 
+
+    # responses for the arch user replies
+    responses = ["",
+    "Oh you use arch? Why don’t you `sudo pacman -S some-bitches`.", 
+    """
+```
+sudo pacman -Syu
+reboot
+
+grub rescue>
+```    
+    """,
+    "https://tenor.com/view/arch-linux-linux-open-source-arch-i-use-arch-btw-gif-25315741",
+    "https://tenor.com/view/arch-linux-i-use-arch-lonely-gif-26341678",
+    "https://tenor.com/view/me-looking-for-who-asked-looking-for-who-asked-who-asked-me-looking-gif-20318322"
+]
+
     # boolean that will be set to true when views are added
     bot.persistent_views_added = False
 
@@ -35,19 +53,33 @@ def main():
 
     @bot.event
     async def on_message(message):
+        # do not reply with anything if the message is from the bot
         if message.author == bot.user:
             return
-        frong_words = ["frong", "FRONG", "Frong"]
-        arch_words = ["arch", "Arch", "archlinux"]
-        # # annoying ass arch linux reply 
-        # for word in arch_words:
-        #     if word in message.content:
-        #         await message.channel.send('yOu SAiD aRcH!!11!1! i uSe ArCh bTW!!!1!11 🤓🤓🤓')
-        #         break
+        
+        # convert message to all lowercase for case-insensitive matching
+        content_lower = message.content.lower()
+
+        # for arch linux replies
+        arch_words = ["i use arch btw", "i use arch"]
+        for word in arch_words:
+            if word.lower() in content_lower:
+                number = randint(0, len(responses) - 1)
+                # arch form reply
+                if number == 0:
+                    await message.channel.send('An Arch user? You might need this.', files=[nextcord.File('arch_form.jpg')])
+                    return
+                # other insult reply
+                else:
+                    await message.channel.send(responses[number])
+                    return
+
+        # for frong response
+        frong_words = ["frong"]
         for word in frong_words:
-            if word in message.content:
+            if word.lower() in content_lower:
                 await message.channel.send('frong', files=[nextcord.File('frong.png')])
-                break
+                return
 
     for filename in os.listdir('cogs'):
         if filename.endswith('.py'):
