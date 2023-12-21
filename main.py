@@ -61,7 +61,7 @@ grub rescue>
         content_lower = message.content.lower()
 
         # for arch linux replies
-        arch_words = ["i use arch btw", "i use arch"]
+        arch_words = ["i use arch btw", "i use arch", "arch btw"]
         for word in arch_words:
             if word.lower() in content_lower:
                 number = randint(0, len(responses) - 1)
