@@ -9,11 +9,12 @@ class GoogleThat(commands.Cog):
     async def on_ready(self):
         print(f"google-that - Loaded")
 
-    @nextcord.slash_command(name="googlethat")
+    # for testing add guild_ids=[guild_id]
+    @nextcord.slash_command(name="googlethat", description="For people that are too lazy to google themselves.")
     async def googlethat(self, interaction: nextcord.Interaction, question):
         text_new = question.replace(" ", "+")
         url = f"https://letmegooglethat.com/?q={text_new}"
-        await interaction.response.send_message(url)
+        await interaction.response.send_message(f"[{question}]({url})")
 
 def setup(bot):
   bot.add_cog(GoogleThat(bot))
