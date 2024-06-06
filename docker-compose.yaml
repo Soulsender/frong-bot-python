@@ -5,4 +5,7 @@ services:
     image: soulsender/frong-bot:latest
     environment:
       - TOKEN=your_token_here
+    volumes:
+      - /frong-data:/app/data
     restart: unless-stopped
+    

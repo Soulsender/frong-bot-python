@@ -4,7 +4,8 @@ import os
 import csv
 
 # get path name for csv file
-file_path = os.path.join(os.getcwd(), "")
+file_path = os.path.join(os.getcwd(), "data")
+file_path = os.path.join(file_path, "")
 
 class Leaderboard(commands.Cog):
     def __init__(self,bot):

@@ -8,6 +8,10 @@ import csv
 
 load_dotenv()
 
+file_path = os.path.join(os.getcwd(), "data")
+csv_file = "data.csv"
+file_path = os.path.join(file_path, csv_file)
+
 def update_csv(name, filename):
     updated = False
     with open(filename, 'r') as file:
@@ -45,7 +49,6 @@ def main():
         owner_id="null",
     )
 
-    csv_file = "data.csv"
 
     # responses for the arch user replies
     responses = ["",
@@ -101,7 +104,7 @@ def main():
         for word in frong_words:
             if word.lower() in content_lower:
                 # increment message author frong count
-                update_csv(str(message.author), 'data.csv')
+                update_csv(str(message.author), file_path)
 
                 # send frong response
                 await message.channel.send('frong', files=[nextcord.File('frong.png')])
