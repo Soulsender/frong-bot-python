@@ -4,6 +4,9 @@ A multipurpose discord bot originally created for a meme.
 
 ### Functions
 - If a user says the word "frong" the bot will reply with "frong" and the attached image below.
+    - It will also take note of the user, and add them to `data.csv` to count how many times they say frong in total. This `data.csv` files is mounted via docker volume for persistant storage through updates, and ease of backup ~~(if you REALLY care about backing this shit up, consider taking a shower)~~.
+    - You can use `/leaderboard` to see frongs by users, and total frongs said.
+    - ~~I put way too much time into this stupid project.~~
 - If a user says "I use arch btw" or something of a similar degree, the bot will reply with a random response from a list of responses. These include gifs, images, and phrases.
 - `/googlethat` can be used to sarcastically look something up for a user that is too lazy to do it themselves. The bot will reply with a link to [letmegooglethat.com](https://letmegooglethat.com/) with the search query specified.
 - `/frong` and `/frongs` can be used to get the bot to respond with different urban-dictionary-esc phrases made by the CosmodiumCS community.
