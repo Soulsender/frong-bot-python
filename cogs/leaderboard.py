@@ -5,7 +5,9 @@ import csv
 
 # get path name for csv file
 file_path = os.path.join(os.getcwd(), "data")
-file_path = os.path.join(file_path, "")
+csv_file = "data.csv"
+file_path = os.path.join(file_path, csv_file)
+print(file_path)
 
 class Leaderboard(commands.Cog):
     def __init__(self,bot):
@@ -15,12 +17,12 @@ class Leaderboard(commands.Cog):
     async def on_ready(self):
       print(f"leaderboard - Loaded")
 
-    @nextcord.slash_command(name="leaderboard", description="Frong leaderboard")
+    @nextcord.slash_command(name="leaderboard", description="Frong leaderboard", guild_ids=[414625175217242113])
     async def leaderboard(self, interaction: nextcord.Interaction):
       csv_dict = {}
       data = ""
       total = 0
-      with open(file_path + "data.csv", 'r') as file:
+      with open(file_path, 'r') as file:
           reader = csv.DictReader(file)
 
           # turn csv into dictionary
@@ -44,7 +46,7 @@ class Leaderboard(commands.Cog):
       embed = nextcord.Embed(title=":crown: **LEADERBOARD**", color=0xd6b509)
       embed.add_field(name=":speech_balloon: __FRONGS BY USER__", value=data,inline=False)
       embed.add_field(name=":loudspeaker: __TOTAL FRONGS__", value=total,inline=False)
-      await interaction.response.send_message(embed=embed, ephemeral=True)
+      await interaction.response.send_message(embed=embed, ephemeral=False)
 
 def setup(bot):
   bot.add_cog(Leaderboard(bot))

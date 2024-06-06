@@ -8,9 +8,10 @@ import csv
 
 load_dotenv()
 
-file_path = os.path.join(os.getcwd(), "data")
 csv_file = "data.csv"
+file_path = os.path.join(os.getcwd(), "data")
 file_path = os.path.join(file_path, csv_file)
+print(file_path)
 
 def update_csv(name, filename):
     updated = False
