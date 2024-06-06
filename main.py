@@ -4,8 +4,29 @@ from nextcord.ext import commands
 import os
 import aiohttp
 from random import randint
+import csv
 
 load_dotenv()
+
+def update_csv(name, filename):
+    updated = False
+    with open(filename, 'r') as file:
+        reader = csv.DictReader(file)
+        rows = list(reader)
+        for row in rows:
+            if row['Name'] == name:
+                row['Value'] = str(int(row['Value']) + 1)
+                updated = True
+                break
+        else:
+            rows.append({'Name': name, 'Value': '1'})
+            updated = True
+
+    if updated:
+        with open(filename, 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=['Name', 'Value'])
+            writer.writeheader()
+            writer.writerows(rows)
 
 def main():
     # allows privledged intents for monitoring members joining, roles editing, and role assignments
@@ -24,17 +45,18 @@ def main():
         owner_id="null",
     )
 
+    csv_file = "data.csv"
 
     # responses for the arch user replies
     responses = ["",
     "Oh you use arch? Why don’t you `sudo pacman -S some-bitches`.", 
     """
-```
-sudo pacman -Syu
-reboot
+    ```
+    sudo pacman -Syu
+    reboot
 
-grub rescue>
-```    
+    grub rescue>
+    ```    
     """,
     "https://tenor.com/view/arch-linux-linux-open-source-arch-i-use-arch-btw-gif-25315741",
     "https://tenor.com/view/arch-linux-i-use-arch-lonely-gif-26341678",
@@ -78,6 +100,10 @@ grub rescue>
         frong_words = ["frong"]
         for word in frong_words:
             if word.lower() in content_lower:
+                # increment message author frong count
+                update_csv(str(message.author), 'data.csv')
+
+                # send frong response
                 await message.channel.send('frong', files=[nextcord.File('frong.png')])
                 return
 
