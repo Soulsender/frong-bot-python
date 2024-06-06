@@ -17,7 +17,7 @@ class Leaderboard(commands.Cog):
     async def on_ready(self):
       print(f"leaderboard - Loaded")
 
-    @nextcord.slash_command(name="leaderboard", description="Frong leaderboard", guild_ids=[414625175217242113])
+    @nextcord.slash_command(name="leaderboard", description="Frong leaderboard")
     async def leaderboard(self, interaction: nextcord.Interaction):
       csv_dict = {}
       data = ""
