@@ -1,5 +1,10 @@
 import nextcord
 from nextcord.ext import commands
+import os
+import csv
+
+# get path name for csv file
+file_path = os.path.join(os.getcwd(), "")
 
 class Sourcecode(commands.Cog):
     def __init__(self,bot):
@@ -8,6 +13,37 @@ class Sourcecode(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
       print(f"frong - Loaded")
+
+    @nextcord.slash_command(name="leaderboard", description="Frong leaderboard", guild_ids=[414625175217242113])
+    async def leaderboard(self, interaction: nextcord.Interaction):
+      csv_dict = {}
+      data = ""
+      total = 0
+      with open(file_path + "data.csv", 'r') as file:
+          reader = csv.DictReader(file)
+
+          # turn csv into dictionary
+          for row in reader:
+              key = row.pop('Name')  # Replace 'Key_Column_Name' with the actual column name for the key
+              csv_dict[key] = row
+
+          # sort the dictionary
+          sorted_dict = dict(sorted(csv_dict.items(), key=lambda x: int(x[1]['Value']), reverse=True))
+
+          # get values from dictionary
+          for key, value in sorted_dict.items():
+              content = "**" + key + "**: "
+              data += content
+              for key2, value2 in dict(value).items():
+                  content2 = value2 + "\n"
+                  data += content2
+                  total += int(value2)
+
+      # send embed
+      embed = nextcord.Embed(title="**LEADERBOARD**", color=0x4287f5)
+      embed.add_field(name="__FRONGS BY USER__", value=data,inline=False)
+      embed.add_field(name="__TOTAL FRONGS__", value=total,inline=False)
+      await interaction.response.send_message(embed=embed, ephemeral=False)
 
     @nextcord.slash_command(name="frongs", description="List all Frong definitions")
     async def frongs(self, interaction: nextcord.Interaction):
