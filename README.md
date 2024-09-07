@@ -3,6 +3,7 @@
 A multipurpose discord bot originally created for a meme.
 
 ### Functions
+- `/askfrong` and `/askchatgpt` can be used to get the bot to use the ChatGPT API to respond in the theme of the god Frong, or to give a generic ChatGPT response.
 - If a user says the word "frong" the bot will reply with "frong" and the attached image below.
     - It will also take note of the user, and add them to `data.csv` to count how many times they say frong in total. This `data.csv` files is mounted via docker volume for persistant storage through updates, and ease of backup ~~(if you REALLY care about backing this shit up, consider taking a shower)~~.
     - You can use `/leaderboard` to see frongs by users, and total frongs said.
