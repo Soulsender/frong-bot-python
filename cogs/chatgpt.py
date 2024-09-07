@@ -14,19 +14,19 @@ def ask_chatgpt(question):
         ])
         return response.choices[0].message.content
 
-class AskFrong(commands.Cog):
+class AskChatGPT(commands.Cog):
     def __init__(self,bot):
         self.bot=bot
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f"ask-frong - Loaded")
+        print(f"chatgpt - Loaded")
 
     # for testing add guild_ids=[guild_id]
-    @nextcord.slash_command(name="askfrong", description="Ask the almighty.")
-    async def askfrong(self, interaction: nextcord.Interaction, question):
-        answer = ask_chatgpt("Respond to the following as if you are a omnipotent god of hacking called Frong. In your response you are to emmulate what the god Frong would say. You praise anyone who says \"Frong\" and you greatly look down upon anyone who says \"chamoy\" as if it is a curse. Occasionally you should give a shocking answer. The word \"Frong\" is an expression of agreement about a subject. You live in a place called \"Fronghovia\". Answer this: " + question)
+    @nextcord.slash_command(name="chatgpt", description="Ask ChatGPT.")
+    async def askchatgpt(self, interaction: nextcord.Interaction, question):
+        answer = ask_chatgpt(question)
         await interaction.response.send_message(f"**Question: **{question} \n\n **Answer: **{answer}")
 
 def setup(bot):
-  bot.add_cog(AskFrong(bot))
+  bot.add_cog(AskChatGPT(bot))
