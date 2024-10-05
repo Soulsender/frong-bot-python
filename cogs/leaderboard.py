@@ -19,6 +19,7 @@ class Leaderboard(commands.Cog):
 
     @nextcord.slash_command(name="leaderboard", description="Frong leaderboard")
     async def leaderboard(self, interaction: nextcord.Interaction):
+      await interaction.response.defer()
       csv_dict = {}
       data = ""
       total = 0
