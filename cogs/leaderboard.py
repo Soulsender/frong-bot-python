@@ -19,7 +19,6 @@ class Leaderboard(commands.Cog):
 
     @nextcord.slash_command(name="leaderboard", description="Frong leaderboard")
     async def leaderboard(self, interaction: nextcord.Interaction):
-      await interaction.response.defer()
       csv_dict = {}
       data = ""
       total = 0
@@ -47,7 +46,7 @@ class Leaderboard(commands.Cog):
       embed = nextcord.Embed(title=":crown: **LEADERBOARD**", color=0xd6b509)
       embed.add_field(name=":speech_balloon: __FRONGS BY USER__", value=data,inline=False)
       embed.add_field(name=":loudspeaker: __TOTAL FRONGS__", value=total,inline=False)
-      await interaction.followup.send(embed=embed, ephemeral=False)
+      await interaction.response.send_message(embed=embed, ephemeral=False)
 
 def setup(bot):
   bot.add_cog(Leaderboard(bot))
