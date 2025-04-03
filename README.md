@@ -1,5 +1,7 @@
 # Frong Bot
 
+[This project is deprecated, see the new project here.](https://github.com/Soulsender/frong-bot)
+
 A multipurpose discord bot originally created for a meme.
 
 ### Functions
